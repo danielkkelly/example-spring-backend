@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="dan" id="1.0.0-security-01" context="common">
+        <createTable tableName="security_permission">
+            <column autoIncrement="true" name="security_permission_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="security_permission_name" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="security_permission_description" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="dan" id="1.0.0-security-02" context="common">
+        <createTable tableName="security_role">
+            <column autoIncrement="true" name="security_role_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="security_role_name" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="security_role_description" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="dan" id="1.0.0-security-03" context="common">
+        <createTable tableName="security_role_permission">
+            <column autoIncrement="true" name="security_role_permission_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="security_role_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="security_permission_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="dan" id="1.0.0-security-04" context="common">
+        <addForeignKeyConstraint
+                baseColumnNames="security_role_id"
+                baseTableName="security_role_permission"
+                constraintName="FK_security_role_permission_security_role"
+                deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                referencedColumnNames="security_role_id"
+                referencedTableName="security_role"/>
+    </changeSet>
+
+    <changeSet author="dan" id="1.0.0-security-05" context="common">
+        <addForeignKeyConstraint
+                baseColumnNames="security_permission_id"
+                baseTableName="security_role_permission"
+                constraintName="FK_security_role_permission_security_permission"
+                deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                referencedColumnNames="security_permission_id"
+                referencedTableName="security_permission"/>
+    </changeSet>
+
+    <changeSet author="dan" id="1.0.0-security-06" context="common">
+        <createTable tableName="user_security_role">
+            <column autoIncrement="true" name="user_security_role_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="security_role_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="dan" id="1.0.0-security-07" context="common">
+        <addForeignKeyConstraint
+                baseColumnNames="user_id"
+                baseTableName="user_security_role"
+                constraintName="FK_user_security_role_user"
+                deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                referencedColumnNames="user_id"
+                referencedTableName="user"/>
+    </changeSet>
+
+    <changeSet author="dan" id="1.0.0-security-08" context="common">
+        <addForeignKeyConstraint
+                baseColumnNames="security_role_id"
+                baseTableName="user_security_role"
+                constraintName="FK_user_security_role_security_role"
+                deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                referencedColumnNames="security_role_id"
+                referencedTableName="security_role"/>
+    </changeSet>
+
+   <changeSet author="dan" id="1.0.0-security-09" context="common">
+        <insert tableName="security_role">
+            <column name="security_role_name" value="User Admin"/>
+            <column name="security_role_description" value="Manages users"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="dan" id="1.0.0-security-10" context="common">
+        <insert tableName="security_role">
+            <column name="security_role_name" value="System Admin"/>
+            <column name="security_role_description" value="Manages the system"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="dan" id="1.0.0-security-11" context="common">
+        <insert tableName="security_permission">
+            <column name="security_permission_name" value="admin:user"/>
+            <column name="security_permission_description" value="Ability to manage users"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="dan" id="1.0.0-security-12" context="common">
+        <insert tableName="security_permission">
+            <column name="security_permission_name" value="admin:security"/>
+            <column name="security_permission_description" value="Ability manage security"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="dan" id="1.0.0-security-13">
+       <sql>
+            insert into security_role_permission(security_role_id, security_permission_id) values (
+            (select security_role_id from security_role where security_role_name = 'User Admin'),
+            (select security_permission_id from security_permission where security_permission_name = 'admin:user'));
+        </sql>
+        <sql>
+            insert into security_role_permission(security_role_id, security_permission_id) values (
+            (select security_role_id from security_role where security_role_name = 'System Admin'),
+            (select security_permission_id from security_permission where security_permission_name = 'admin:user'));
+        </sql>
+        <sql>
+            insert into security_role_permission(security_role_id, security_permission_id) values (
+            (select security_role_id from security_role where security_role_name = 'System Admin'),
+            (select security_permission_id from security_permission where security_permission_name = 'admin:security'));
+        </sql> 
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <!-- create "root" with a password of "password", grant the system admin role -->
+
+    <property name="now" value="now()" dbms="mysql"/>
+
+    <changeSet author="dan" id="1.0.0-admin-user-1" context="common">
+        <insert tableName="user">
+            <column name="username" value="root@dev.internal"/>
+            <column name="password" value="$2a$10$v1Wn4meZZT/UOHA7mOkT2O/x6G35/WAudXzPgBJQGyb/zhMWXiYPu"/>
+            <column name="created_date" value="${now}"/>
+            <column name="updated_date" value="${now}"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="dan" id="1.0.0-admin-user-2">
+       <sql>
+            insert into user_security_role(user_id, security_role_id) values (
+            (select max(user_id) from user),
+            (select security_role_id from security_role where security_role_name = 'System Admin'))
+        </sql>
+    </changeSet>
+</databaseChangeLog>
