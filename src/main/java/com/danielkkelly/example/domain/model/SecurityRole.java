@@ -15,15 +15,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import org.springframework.data.rest.core.annotation.RestResource;
 
 /**
  * Models a User Role.
  */
 @Entity
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "security_role")
 public class SecurityRole extends AbstractEntity<Long> {
     /** System identifier. */

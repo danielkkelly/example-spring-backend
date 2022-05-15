@@ -3,7 +3,7 @@ package com.danielkkelly.example.service;
 import javax.inject.Inject;
 
 import com.danielkkelly.example.domain.model.SecurityRole;
-import com.danielkkelly.example.repository.SecurityRoleRepository;
+import com.danielkkelly.example.repository.jpa.SecurityRoleRepository;
 
 import org.springframework.stereotype.Service;
 

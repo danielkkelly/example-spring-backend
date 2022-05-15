@@ -7,6 +7,7 @@
 
     <!-- create "root" with a password of "password", grant the system admin role -->
 
+    <property name="now" value="now()" dbms="postgresql"/>
     <property name="now" value="now()" dbms="mysql"/>
 
     <changeSet author="dan" id="1.0.0-admin-user-1" context="common">
@@ -21,7 +22,7 @@
     <changeSet author="dan" id="1.0.0-admin-user-2">
        <sql>
             insert into user_security_role(user_id, security_role_id) values (
-            (select max(user_id) from user),
+            (select max(user_id) from public.user),
             (select security_role_id from security_role where security_role_name = 'System Admin'))
         </sql>
     </changeSet>

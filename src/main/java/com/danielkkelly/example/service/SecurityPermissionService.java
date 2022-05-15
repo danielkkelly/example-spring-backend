@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 
 import com.danielkkelly.example.domain.model.SecurityPermission;
-import com.danielkkelly.example.repository.SecurityPermissionRepository;
+import com.danielkkelly.example.repository.jpa.SecurityPermissionRepository;
 
 /**
  * Business logic around SecurityPermissions.

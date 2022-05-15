@@ -31,12 +31,12 @@ import lombok.ToString;
 
 @Entity
 @Cacheable
-@Table(name = "user")
+@Table(name = "\"user\"")
 @Getter @Setter
 @ToString(exclude = {"password"})
 public class User extends Person implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
 

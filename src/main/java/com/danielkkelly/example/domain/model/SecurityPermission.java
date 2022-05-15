@@ -20,7 +20,6 @@ import javax.validation.constraints.Size;
  * Models a User Permission.
  */
 @Entity
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "security_permission")
 public class SecurityPermission extends AbstractEntity<Long> {
 

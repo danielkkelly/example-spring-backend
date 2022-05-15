@@ -11,7 +11,7 @@ import com.danielkkelly.example.domain.mapper.UserEditMapper;
 import com.danielkkelly.example.domain.model.SecurityPermission;
 import com.danielkkelly.example.domain.model.SecurityRole;
 import com.danielkkelly.example.domain.model.User;
-import com.danielkkelly.example.repository.UserRepository;
+import com.danielkkelly.example.repository.jpa.UserRepository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
