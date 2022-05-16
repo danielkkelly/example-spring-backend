@@ -2,7 +2,6 @@ package com.danielkkelly.example.domain.assembler;
 
 import com.danielkkelly.example.controller.UserController;
 import com.danielkkelly.example.domain.dto.UserModel;
-import com.danielkkelly.example.domain.model.SecurityRole;
 import com.danielkkelly.example.domain.model.User;
 
 import org.springframework.data.rest.webmvc.support.RepositoryEntityLinks;

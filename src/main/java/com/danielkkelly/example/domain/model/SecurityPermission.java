@@ -1,7 +1,5 @@
 package com.danielkkelly.example.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
