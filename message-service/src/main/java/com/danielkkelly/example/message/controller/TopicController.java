@@ -9,20 +9,21 @@ import reactor.core.publisher.Mono;
 import javax.inject.Inject;
 
 @RestController
+@RequestMapping("/topics")
 public class TopicController {
 
     @Inject
     private TopicService service;
-    @GetMapping("/topics")
+    @GetMapping
     public Flux findAllTopics() {
         return service.findAll();
     }
 
-    @GetMapping("/topics/{id}")
+    @GetMapping("/{id}")
     public Mono findById(@PathVariable Long id) {
         return service.findById(id);
     }
-    @PostMapping("/topics")
+    @PostMapping
     public Mono create(@RequestBody Topic topic) {
         return service.save(topic);
     }
