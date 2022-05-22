@@ -7,4 +7,5 @@ spring:
     password: example_ddl
 logging:
   level:
-  - org.springframework.r2dbc: DEBUG
+    org.springframework.r2dbc: DEBUG
+    org.springframework.security: DEBUG
