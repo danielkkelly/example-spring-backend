@@ -14,11 +14,32 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+	<developers>
+		<developer>
+			<id>dk</id>
+			<name>Dan Kelly</name>
+			<email>daniel_k_kelly@yahoo.com</email>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>MIT</name>
+			<url>https://opensource.org/licenses/MIT</url>
+		</license>
+	</licenses>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
 
 	<dependencies>
+		<!-- JSR 329 compliant dependency injection.  Use @Inject vs. @Autowired -->
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
