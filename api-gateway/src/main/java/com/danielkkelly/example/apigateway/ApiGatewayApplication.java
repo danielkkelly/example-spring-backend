@@ -19,10 +19,10 @@ public class ApiGatewayApplication {
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
 		return builder.routes()
 				.route("auth-service", p -> p
-						.path("/v1/auth/**")
+						.path("/v1/security/**")
 						.filters(f ->
-							f.rewritePath("/v1/auth/(?<segment>.*)", "/${segment}"))
-						.uri("lb://auth-service"))
+							f.rewritePath("/v1/security/(?<segment>.*)", "/${segment}"))
+						.uri("lb://security-service"))
 				.build();
 	}
 }

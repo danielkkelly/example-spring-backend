@@ -10,11 +10,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	
-	<groupId>com.danielkkelly</groupId>
-	<artifactId>example</artifactId>
+	<groupId>com.danielkkelly.example</groupId>
+	<artifactId>security</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>example</name>
-	<description>Example REST API</description>
+	<name>Security Service</name>
+	<description>Provides application security</description>
 
 	<developers>
 		<developer>
