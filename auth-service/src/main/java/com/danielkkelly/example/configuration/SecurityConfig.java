@@ -81,6 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// Our public endpoints
 				.antMatchers(HttpMethod.POST, "/registrations").permitAll()
 				.antMatchers(HttpMethod.POST, "/tokens").permitAll()
+				.antMatchers(HttpMethod.GET, "/ping").permitAll()
 				// Our private endpoints
 				.anyRequest().authenticated()
 				// Set up oauth2 resource server
@@ -106,8 +107,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public JwtAuthenticationConverter jwtAuthenticationConverter() {
 		JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter 
 			= new JwtGrantedAuthoritiesConverter();
-		//jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName("roles");
-		//jwtGrantedAuthoritiesConverter.setAuthorityPrefix("ROLE_");
 
 		JwtAuthenticationConverter jwtAuthenticationConverter 
 			= new JwtAuthenticationConverter();
@@ -116,7 +115,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	// Set password encoding schema.  BCrypt will automatically salt the password and 
-	// store the salt within the generated hash, protecting against prehashed password
+	// store the salt within the generated hash, protecting against pre-hashed password
 	// attacks.
 	@Bean
 	public PasswordEncoder passwordEncoder() {

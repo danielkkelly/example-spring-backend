@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.danielkkelly</groupId>
-	<artifactId>service-registry</artifactId>
+	<artifactId>discovery-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Service Registry</name>
 	<description>Service registry using Eureka</description>
