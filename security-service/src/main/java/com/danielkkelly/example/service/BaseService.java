@@ -1,17 +1,14 @@
 package com.danielkkelly.example.service;
 
-import java.util.Date;
-import java.util.List;
-
 import com.danielkkelly.example.domain.exception.NotFoundException;
 import com.danielkkelly.example.domain.model.AbstractEntity;
 import com.danielkkelly.example.domain.model.Stamped;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.Date;
 
 @Slf4j
 public abstract class BaseService <T extends AbstractEntity<Long>> {
@@ -19,13 +16,13 @@ public abstract class BaseService <T extends AbstractEntity<Long>> {
      * Implementations must supply a DAO for their Entity Type.
      * @return a JpaRepository implementation.
      */
-    protected abstract JpaRepository<T, Long> getRepository();
+    protected abstract PagingAndSortingRepository<T, Long> getRepository();
 
     public Page<T> findAll(Pageable pageable) {
         return getRepository().findAll(pageable);
     }
 
-    public List<T> findAll() {
+    public Iterable<T> findAll() {
         return getRepository().findAll();
     }
 
