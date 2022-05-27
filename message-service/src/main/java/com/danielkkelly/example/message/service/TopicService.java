@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 import javax.inject.Inject;
 
 @Service
-public class TopicService<T extends Topic> {
+public class TopicService {
 
     @Inject
     private TopicRepository repository;
@@ -20,6 +20,14 @@ public class TopicService<T extends Topic> {
 
     public Mono<Topic> findById(final Long id) {
         return repository.findById(id);
+    }
+
+    public Mono<Topic> edit(final Long id, final Topic topic) {
+        return repository.findById(id)
+                .flatMap(updated -> {
+                    updated.setTopicName(topic.getTopicName());
+                    return repository.save(updated);
+                });
     }
 
     public Mono<Topic> save(final Topic topic) {

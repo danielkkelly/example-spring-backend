@@ -2,6 +2,8 @@ package com.danielkkelly.example.message.controller;
 
 import com.danielkkelly.example.message.domain.model.Topic;
 import com.danielkkelly.example.message.service.TopicService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -14,17 +16,29 @@ public class TopicController {
 
     @Inject
     private TopicService service;
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Mono<ResponseEntity<Topic>> create(@RequestBody Topic topic) {
+        return service.save(topic);
+    }
+
     @GetMapping
-    public Flux findAllTopics() {
+    public Flux<Topic> findAllTopics() {
         return service.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Mono findById(@PathVariable Long id) {
-        return service.findById(id);
+    @PutMapping("/{id}")
+    public Mono<ResponseEntity<Topic>> edit(@PathVariable Long id, @RequestBody Topic topic) {
+        return service.edit(id, topic)
+                .map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
-    @PostMapping
-    public Mono create(@RequestBody Topic topic) {
-        return service.save(topic);
+
+    @GetMapping("/{id}")
+    public Mono<ResponseEntity<Topic>> findById(@PathVariable Long id) {
+        Mono<Topic> topic = service.findById(id);
+        return topic.map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 }
