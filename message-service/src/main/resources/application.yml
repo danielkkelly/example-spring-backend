@@ -5,6 +5,8 @@ spring:
     url: r2dbc:postgresql://localhost:5432/example
     username: example_ddl
     password: example_ddl
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
 logging:
   level:
     org.springframework.r2dbc: DEBUG

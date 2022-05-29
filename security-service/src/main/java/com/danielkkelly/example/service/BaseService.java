@@ -1,8 +1,8 @@
 package com.danielkkelly.example.service;
 
-import com.danielkkelly.example.domain.exception.NotFoundException;
+import com.danielkkelly.example.commons.domain.exception.NotFoundException;
+import com.danielkkelly.example.commons.domain.model.Stamped;
 import com.danielkkelly.example.domain.model.AbstractEntity;
-import com.danielkkelly.example.domain.model.Stamped;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

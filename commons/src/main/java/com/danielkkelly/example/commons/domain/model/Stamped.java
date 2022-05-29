@@ -1,8 +1,6 @@
-package com.danielkkelly.example.domain.model;
+package com.danielkkelly.example.commons.domain.model;
 
 import java.util.Date;
-
-import lombok.Getter;
 
 /**
  * Created by dkelly on 11/19/16.

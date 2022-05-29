@@ -1,4 +1,4 @@
-package com.danielkkelly.example.domain.exception;
+package com.danielkkelly.example.commons.domain.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;

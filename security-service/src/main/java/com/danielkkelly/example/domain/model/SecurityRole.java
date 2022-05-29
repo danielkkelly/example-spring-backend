@@ -29,7 +29,7 @@ public class SecurityRole extends AbstractEntity<Long> {
     @Column(name = "security_role_id")
     private Long id;
 
-    /** The human readable name.*/
+    /** The human-readable name.*/
     @NotNull
     @Size(min = 3, max = 50)
     @Column(name = "security_role_name")

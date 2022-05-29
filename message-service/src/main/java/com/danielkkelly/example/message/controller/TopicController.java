@@ -9,18 +9,18 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/topics")
 public class TopicController {
-
     @Inject
     private TopicService service;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<ResponseEntity<Topic>> create(@RequestBody Topic topic) {
-        return service.save(topic);
+    public Mono<Topic> create(@RequestBody @Valid Topic topic) {
+        return service.create(topic);
     }
 
     @GetMapping

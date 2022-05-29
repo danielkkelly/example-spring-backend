@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.danielkkelly.example.commons.domain.exception.NotFoundException;
+import com.danielkkelly.example.commons.domain.exception.ValidationException;
 import com.danielkkelly.example.domain.dto.UserCreateRequest;
-import com.danielkkelly.example.domain.exception.NotFoundException;
-import com.danielkkelly.example.domain.exception.ValidationException;
 import com.danielkkelly.example.domain.mapper.UserEditMapper;
 import com.danielkkelly.example.domain.model.SecurityPermission;
 import com.danielkkelly.example.domain.model.SecurityRole;
