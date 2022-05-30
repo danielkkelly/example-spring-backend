@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="dan" id="1.0.0-topic-1" context="common">
+        <createTable tableName="topic">
+            <column name="topic_id" type="INT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="topic_name" type="VARCHAR(100)"/>
+            <column name="created_date" type="DATETIME"/>
+            <column name="updated_date" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dan" id="1.0.0-topic-2" context="common">
+        <createTable tableName="message">
+            <column name="message_id" type="INT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="topic_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="message_body" type="VARCHAR(500)"/>
+            <column name="created_date" type="DATETIME"/>
+            <column name="updated_date" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dan" id="1.0.0-topic-2a" context="common">
+        <addForeignKeyConstraint
+                baseColumnNames="topic_id"
+                baseTableName="message"
+                constraintName="FK_message_topic"
+                deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                referencedColumnNames="topic_id"
+                referencedTableName="topic"
+                referencesUniqueColumn="false"/>
+    </changeSet>
+</databaseChangeLog>
