@@ -1,6 +1,8 @@
 #!/usr/local/bin/bash
+# Use brew to install postgres.  On newer Macbooks HOMEBREW_HOME is usually
+# /opt/homebrew but on older machines brew will install software under 
+# /usr/local.  
 
-declare HOMEBREW_HOME=/opt/homebrew
 declare action
 
 function parse_cli {
@@ -13,7 +15,7 @@ function parse_cli {
 	done
 
 	# Parse command line options safely using getops
-	while getopts "c:m:a:tnp:e:bv" opt; do
+	while getopts "a:" opt; do
 		case $opt in
 			a) action=$OPTARG ;;
 			\?)
@@ -36,6 +38,16 @@ function check_cli { # by making sure that the requied options are supplied, etc
 	done;
 }
 
+# Verify that the prerequisite environment variable exists, otherwise things don't 
+# work down the line.
+function check_env {
+	if [[ "x$HOMEBREW_HOME" == "x" ]] 
+	then
+		echo "please set HOMEBREW_HOME and try again"
+		exit 1
+	fi
+}
+
 function main {
 	case "$action" in 
 		start)
@@ -54,6 +66,7 @@ function main {
 }
 
 parse_cli $@
+check_env
 check_cli
 main
 

@@ -1,5 +1,7 @@
 package com.danielkkelly.example.domain.model;
 
+import com.danielkkelly.example.commons.domain.model.Stamped;
+
 import java.util.Date;
 
 import javax.persistence.Column;
